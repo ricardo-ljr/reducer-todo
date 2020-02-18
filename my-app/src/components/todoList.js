@@ -44,11 +44,21 @@ export default function TodoForm() {
         >
           Add
         </Button>
+        <Button
+          color="primary"
+          onClick={() => dispatch({ type: "REMOVE_TODO_ITEM" })}
+        >
+          Clear Completed Items
+        </Button>
       </form>
       <div>
         {state.todos.map(todo => (
-          <li key={todo.id} onClick={() => dispatch({ type: "TOGGLE" })}>
-            {todo.completed ? todo.item : <strike>{todo.item}</strike>}
+          <li
+            className={`item${todo.completed ? " completed" : ""}`}
+            key={todo.id}
+            onClick={() => dispatch({ type: "TOGGLE", payload: todo.id })}
+          >
+            {todo.item}
           </li>
         ))}
       </div>
